@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CarService from "../../services/CarService";
 
 const UpdateCar = () => {
@@ -14,6 +14,7 @@ const UpdateCar = () => {
   });
 
   const updateCar = (e) => {
+    console.log(id);
     e.preventDefault();
     CarService.updateCar(car, id)
       .then((response) => {

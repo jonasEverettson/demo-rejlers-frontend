@@ -85,7 +85,9 @@ const AddCar = () => {
           ></input>
         </div>
         <div className="items-center justify-center h-14 w-full my-4">
-          <label className="block text-emerald-50 text-sm font-normal">Km</label>
+          <label className="block text-emerald-50 text-sm font-normal">
+            Km
+          </label>
           <input
             type="text"
             name="km"

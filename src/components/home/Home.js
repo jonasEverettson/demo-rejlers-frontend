@@ -42,29 +42,46 @@ const Home = () => {
       <div className="container mx-6 my-6 ml-30">
         <div className="h-12">
           <div className="my-6 px-2 py-2 m-1 font-semibold">
+            <h1 className="font-thin text-emerald-50 text-2xl tracking-wider">
+              Var vänlig och välj datum för din bokning.
+            </h1>
+            <br />
+            <label className="text-emerald-50">Från: </label>
             <input
+              className="appearance-none border border-gray-300 rounded-md py-2 px-4 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               type="date"
               value={startDate}
               onChange={handleChangeStartDate}
             />
+
+            <label className="ml-2 text-emerald-50">Till: </label>
             <input
+              className=" appearance-none border border-gray-300 rounded-md py-2 px-4 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
+
+            <button>
+              <a
+                onClick={handleBookedCar}
+                className="rounded bg-slate-600 text-white px-2 py-2 m-2 font-semibold hover:bg-slate-400"
+              >
+                Boka Bil
+              </a>
+            </button>
           </div>
-          <button>
-            <a
-              onClick={handleBookedCar}
-              className="rounded bg-slate-600 text-white px-2 py-2 m-2 font-semibold hover:bg-slate-400"
-            >
-              Boka Bil
-            </a>
-          </button>
+          <br />
+          <br />
+
+          <h2 className="font-thin text-emerald-50 text-2xl tracking-wider ml-2">
+            Registrera din återkomst.
+          </h2>
+          <br />
           <button>
             <a
               onClick={() => navigate("/bookingList")}
-              className="rounded bg-slate-600 text-white px-2 py-2 m-1 font-semibold hover:bg-slate-400"
+              className="rounded bg-slate-600 text-white px-2 py-2 m-1 font-semibold hover:bg-slate-400 ml-2"
             >
               Avsluta Bokning
             </a>

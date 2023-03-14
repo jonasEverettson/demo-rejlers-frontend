@@ -7,6 +7,7 @@ const FinishBooking = () => {
   const car = location.state.car;
 
   const [km, setKm] = useState();
+  const [bookingIsFinished, setBookingIsFinished] = useState(false);
 
   const handleKmChange = (event) => {
     setKm(event.target.value);
@@ -31,7 +32,7 @@ const FinishBooking = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        // redirect to confirmation page or update UI
+        setBookingIsFinished(true);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -41,24 +42,44 @@ const FinishBooking = () => {
 
   return (
     <div>
-      <h1 className="text-white">Avsluta Bokningen</h1>
-      <p className="text-white">
-        Bil: {car.make} {car.model}
-      </p>
-      <form onSubmit={handleSubmit}>
-        <label className="text-white">
-          Kilometer:
-          <input
-            className="text-black"
-            type="number"
-            value={km}
-            onChange={handleKmChange}
-          />
-        </label>
-        <button className="text-white" type="submit">
-          Submit
-        </button>
-      </form>
+      <div className="flex max-w-2xl mx-auto shadow border-b ">
+        <div className="px-8 py-8">
+          <div className="font-thin text-emerald-50 text-2xl tracking-wider">
+            <h1>Avsluta Bokningen</h1>
+          </div>
+          <div className="items-center justify-center h-14 w-full my-4">
+            <p className="text-white">
+              Bil: {car.brand} {car.model} {car.registrationNumber}
+              <br /> Tidigare KM-ställning: {car.km}
+              km
+            </p>
+          </div>
+
+          {bookingIsFinished ? (
+            <p className="text-white">Bokningen är nu avslutad.</p>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <label className="text-white">
+                Ange Ny Kilometer:
+                <input
+                  type="number"
+                  className="w-20 mx-2 text-black"
+                  value={km}
+                  onChange={handleKmChange}
+                />
+                km
+              </label>
+              <br />
+              <button
+                className="rounded bg-slate-600 text-white px-2 py-2 font-semibold hover:bg-slate-400 mt-3"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

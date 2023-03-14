@@ -28,41 +28,46 @@ export default function Login() {
   }
 
   return (
-    <div className="login">
-      <h1 className="text-white">Log in!</h1>
-      {showErrorMessage && (
-        <div className="errorMessage text-white">
-          Authentication Failed. Please check your credentials.
-        </div>
-      )}
-      <div className="loginForm">
-        <div className="py-1 ">
-          <label className="text-white px-2">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div className="py-2 ">
-          <label className="text-white px-2">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
+    <div className="flex max-w-2xl mx-20 shadow border-b ">
+      <div className="px-8 py-8">
+        <h1 className="font-thin text-emerald-50 text-2xl tracking-wider mb-3 ml-32 ">
+          Logga in
+        </h1>
+        {showErrorMessage && (
+          <div className="errorMessage text-white">
+            Autentisering misslyckad. Var vänlig kontrollera dina uppgifter.
+          </div>
+        )}
+        <div className="loginForm">
+          <div className="py-1 ">
+            <label className="text-white px-2">Användarnamn:</label>
+            <input
+              type="text"
+              name="username"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+          </div>
+          <div className="py-2 ">
+            <label className="text-white px-2">Lösenord:</label>
+            <input
+              className="ml-10"
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </div>
 
-        <button
-          className="loginButton text-white"
-          type="button"
-          name="login"
-          onClick={handleSubmit}
-        >
-          Login
-        </button>
+          <button
+            className="rounded bg-slate-600 text-white px-2 py-2 font-semibold hover:bg-slate-400 mt-4 ml-2"
+            type="button"
+            name="login"
+            onClick={handleSubmit}
+          >
+            Login
+          </button>
+        </div>
       </div>
     </div>
   );
