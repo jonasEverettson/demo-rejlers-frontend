@@ -54,16 +54,16 @@ const BookingDetails = () => {
                 Efternamn
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Registreringsnummer
+                Reg.nr
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                destination
+                Destination
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                aktivitet
-              </th>
+                uppdragsnr
+              </th>      
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                uppdragsnummer
+                aktivitetsnr
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Email

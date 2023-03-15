@@ -9,6 +9,17 @@ const BookingList = () => {
   const [loading, setLoading] = useState(true);
   const [booking, setBookings] = useState(null);
 
+
+  // Sorterar upp tabellen efter Datum Från
+  const sortBookingsByDateFrom = (bookings) => {
+    return bookings
+      ? bookings.sort((a, b) => {
+          return new Date(a.dateFrom) - new Date(b.dateFrom);
+        })
+      : [];
+  };
+  const sortedBookings = sortBookingsByDateFrom(booking)
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -54,16 +65,16 @@ const BookingList = () => {
                 Efternamn
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Registreringsnummer
+                Reg.nr
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                destination
+                Destination
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-              uppdragsnummer 
+              Uppdragsnr 
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-              aktivitet
+              Aktivitet
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Email
@@ -79,7 +90,7 @@ const BookingList = () => {
 
           {!loading && (
             <tbody className="bg-white">
-              {booking.map((booking) => (
+              {sortedBookings.map((booking) => (
                 <Booking
                   booking={booking}
                   deleteBooking={deleteBooking}

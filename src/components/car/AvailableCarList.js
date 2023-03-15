@@ -59,7 +59,7 @@ const AvailableCarList = () => {
 
           {!loading && (
             <tbody className="bg-white">
-              {cars &&
+              {cars && cars.length > 0 ? (
                 cars.map((car) => (
                   <AvailableCar
                     car={car}
@@ -67,7 +67,15 @@ const AvailableCarList = () => {
                     startDate={startDate}
                     endDate={endDate}
                   />
-                ))}
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center py-4">
+                    Tyvärr, Alla bilar är uthyrda under den valda perioden <br/>
+                    Här är numret till Hertz: 054-21 08 00
+                  </td>
+                </tr>
+              )}
             </tbody>
           )}
         </table>
