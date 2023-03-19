@@ -43,9 +43,15 @@ const Booking = ({ booking, deleteBooking }) => {
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">{booking.employee.email}</div>
       </td>
+
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">
           {booking.employee.employeeNumber}
+        </div>
+      </td>
+      <td className="text-left px-6 py-4 whitespace-nowrap">
+        <div className="text-sm text-gray-500">
+          {booking.active ? "Ja" : "Nej"}
         </div>
       </td>
       <td className="text-right px-2 py-4 whitespace-nowrap font-medium text-sm">

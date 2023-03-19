@@ -10,7 +10,6 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [cars, setCars] = useState(null);
 
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -33,11 +32,11 @@ const Home = () => {
     const start = new Date(startDate);
     const end = new Date(endDate);
 
-    if(start > end){
+    if (start > end) {
       alert("Startdatum kan inte vara efter slutdatum");
-      return
+      return;
     }
-    
+
     navigate("/availableCarList", { state: { startDate, endDate } });
   };
 

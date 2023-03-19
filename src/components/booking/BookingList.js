@@ -9,7 +9,6 @@ const BookingList = () => {
   const [loading, setLoading] = useState(true);
   const [booking, setBookings] = useState(null);
 
-
   // Sorterar upp tabellen efter Datum Från
   const sortBookingsByDateFrom = (bookings) => {
     return bookings
@@ -18,7 +17,7 @@ const BookingList = () => {
         })
       : [];
   };
-  const sortedBookings = sortBookingsByDateFrom(booking)
+  const sortedBookings = sortBookingsByDateFrom(booking);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,16 +70,19 @@ const BookingList = () => {
                 Destination
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-              Uppdragsnr 
+                Uppdragsnr
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-              Aktivitet
+                Aktivitet
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Email
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 ING.nr
+              </th>
+              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
+                Aktiv
               </th>
               <th className="text-right font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Val

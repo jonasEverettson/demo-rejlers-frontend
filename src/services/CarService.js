@@ -20,12 +20,12 @@ class CarService {
   }
 
   updateCar(car, id) {
-    return axios.put("http://localhost:8080/api/v1/editcar/"+ id, car);
+    return axios.put("http://localhost:8080/api/v1/editcar/" + id, car);
   }
 
-  getAvailableCars(){
-    return axios.get("http://localhost:8080/api/v1/availablecars")
+  getAvailableCars() {
+    return axios.get("http://localhost:8080/api/v1/availablecars");
   }
 }
 
-export default new CarService;
+export default new CarService();
