@@ -70,8 +70,8 @@ const AvailableCarList = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" className="text-center py-4">
-                    Tyvärr, Alla bilar är uthyrda under den valda perioden <br/>
+                  <td colSpan="5" className="text-center py-4 ">
+                    Tyvärr, Alla bilar är uthyrda under den valda perioden. <br/>
                     Här är numret till Hertz: 054-21 08 00
                   </td>
                 </tr>

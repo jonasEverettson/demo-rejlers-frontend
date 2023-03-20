@@ -17,8 +17,8 @@ export default function Logout() {
 
   return (
     <div className="logout">
-      <h1 className="text-white">Du är nu utloggad!</h1>
-      <div className="text-white">Tack för den här gången</div>
+      <h1 className="text-white font-medium tracking-wider py-3 px-6 text-center">Du är nu utloggad!</h1>
+      <div className="text-white font-medium tracking-wider py-3 px-6 text-center">Tack för den här gången</div>
     </div>
   );
 }

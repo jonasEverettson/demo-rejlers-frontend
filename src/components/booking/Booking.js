@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
+import "./Booking.css"
 
 const Booking = ({ booking, deleteBooking }) => {
   const { id } = useParams();
@@ -9,6 +10,13 @@ const Booking = ({ booking, deleteBooking }) => {
     console.log(booking.bookingId);
     navigate("/finishBooking", { state: { bookingId: id, car: car } });
   };
+
+  // För att sålla ut alla gamla bokningar i "Övriga kommande bokningar"
+  const dateTo = new Date(booking.dateTo);
+  const currentDate = new Date();
+  if(dateTo < currentDate){
+    return null;
+  }
 
   return (
     <tr key={booking.bookingId}>
@@ -26,7 +34,7 @@ const Booking = ({ booking, deleteBooking }) => {
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">{booking.employee.lastName}</div>
       </td>
-      <td className="text-left px-6 py-4 whitespace-nowrap">
+      <td className="text-left px-6 py-4 whitespace-nowrap uppercase">
         <div className="text-sm text-gray-500">
           {booking.car.registrationNumber}
         </div>
@@ -44,7 +52,7 @@ const Booking = ({ booking, deleteBooking }) => {
         <div className="text-sm text-gray-500">{booking.employee.email}</div>
       </td>
 
-      <td className="text-left px-6 py-4 whitespace-nowrap">
+      <td className="text-left px-6 py-4 whitespace-nowrap uppercase">
         <div className="text-sm text-gray-500">
           {booking.employee.employeeNumber}
         </div>
@@ -55,6 +63,8 @@ const Booking = ({ booking, deleteBooking }) => {
         </div>
       </td>
       <td className="text-right px-2 py-4 whitespace-nowrap font-medium text-sm">
+        {booking.active ? (
+         <>
         <button>
           <a
             onClick={(e, id) =>
@@ -65,6 +75,7 @@ const Booking = ({ booking, deleteBooking }) => {
             Avsluta bokning
           </a>
         </button>
+                
         <button>
           <a
             onClick={(e, id) => {
@@ -81,6 +92,9 @@ const Booking = ({ booking, deleteBooking }) => {
             Ta Bort
           </a>
         </button>
+        </> 
+        ) : null }
+        
       </td>
     </tr>
   );

@@ -8,6 +8,8 @@ export default function Login() {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const navigate = useNavigate();
   const authContext = useAuth();
+  
+
 
   function handleUsernameChange(event) {
     console.log(event);
@@ -56,6 +58,7 @@ export default function Login() {
               name="password"
               value={password}
               onChange={handlePasswordChange}
+              onKeyUp={event => event.key === 'Enter' && handleSubmit()}
             />
           </div>
 
