@@ -5,13 +5,13 @@ import BookingService from "../../services/BookingService";
 
 const AddBooking = () => {
   const location = useLocation();
-    
+
   /* const search = new URLSearchParams(location.search);
   const id = search.get('id'); 
   console.log('id: ',id);
    const dates = location.state && location.state.dates; 
    console.log('dates ', dates);  */
-   
+
   const [booking, setBooking] = useState({
     dateFrom: location.state.startDate,
     dateTo: location.state.endDate,
@@ -19,14 +19,12 @@ const AddBooking = () => {
     jobNumber: "",
     employeeNumber: "",
     activity: "",
-    car:  location.state.car, 
+    car: location.state.car,
   });
-
 
   const navigate = useNavigate();
 
   const saveBooking = (e) => {
-    
     e.preventDefault();
     BookingService.saveOrder(booking)
       .then((response) => {
@@ -41,14 +39,12 @@ const AddBooking = () => {
   const handleChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-  
+
     setBooking((prevBooking) => ({
       ...prevBooking,
       [name]: value,
     }));
   };
-
-  
 
   return (
     <div className="flex max-w-2xl mx-auto shadow border-b ">
@@ -87,8 +83,8 @@ const AddBooking = () => {
           </label>
           <input
             type="text"
-            name="employeeNumber"
-            value={booking.employeeNumber}
+            name="arbetsNummer"
+            value={booking.arbetsNummer}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>

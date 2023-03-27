@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import "./Booking.css"
+import "./Booking.css";
 
 const Booking = ({ booking, deleteBooking }) => {
   const { id } = useParams();
@@ -12,11 +12,11 @@ const Booking = ({ booking, deleteBooking }) => {
   };
 
   // För att sålla ut alla gamla bokningar i "Övriga kommande bokningar"
-  const dateTo = new Date(booking.dateTo);
+  /* const dateTo = new Date(booking.dateTo);
   const currentDate = new Date();
-  if(dateTo < currentDate){
+  if (dateTo < currentDate) {
     return null;
-  }
+  } */
 
   return (
     <tr key={booking.bookingId}>
@@ -52,10 +52,9 @@ const Booking = ({ booking, deleteBooking }) => {
         <div className="text-sm text-gray-500">{booking.employee.email}</div>
       </td>
 
+      {/* Lägg till booking.employee.employeeNumber istället för booking.arbetsnummer när vi har inlogg med användare */}
       <td className="text-left px-6 py-4 whitespace-nowrap uppercase">
-        <div className="text-sm text-gray-500">
-          {booking.employee.employeeNumber}
-        </div>
+        <div className="text-sm text-gray-500">{booking.arbetsNummer}</div>
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">
@@ -64,37 +63,36 @@ const Booking = ({ booking, deleteBooking }) => {
       </td>
       <td className="text-right px-2 py-4 whitespace-nowrap font-medium text-sm">
         {booking.active ? (
-         <>
-        <button>
-          <a
-            onClick={(e, id) =>
-              updateBooking(e, booking.bookingId, booking.car)
-            }
-            className="rounded bg-slate-600 text-white px-2 py-2 m-1 font-semibold hover:bg-slate-400"
-          >
-            Avsluta bokning
-          </a>
-        </button>
-                
-        <button>
-          <a
-            onClick={(e, id) => {
-              if (
-                window.confirm(
-                  "Är du säker på att du vill ta bort den här bokningen?"
-                )
-              ) {
-                deleteBooking(e, booking.bookingId);
-              }
-            }}
-            className="rounded bg-slate-600 text-white px-2 py-2 m-1 font-semibold hover:bg-slate-400"
-          >
-            Ta Bort
-          </a>
-        </button>
-        </> 
-        ) : null }
-        
+          <>
+            <button>
+              <a
+                onClick={(e, id) =>
+                  updateBooking(e, booking.bookingId, booking.car)
+                }
+                className="rounded bg-slate-600 text-white px-2 py-2 m-1 font-semibold hover:bg-slate-400"
+              >
+                Avsluta bokning
+              </a>
+            </button>
+
+            <button>
+              <a
+                onClick={(e, id) => {
+                  if (
+                    window.confirm(
+                      "Är du säker på att du vill ta bort den här bokningen?"
+                    )
+                  ) {
+                    deleteBooking(e, booking.bookingId);
+                  }
+                }}
+                className="rounded bg-slate-600 text-white px-2 py-2 m-1 font-semibold hover:bg-slate-400"
+              >
+                Ta Bort
+              </a>
+            </button>
+          </>
+        ) : null}
       </td>
     </tr>
   );
