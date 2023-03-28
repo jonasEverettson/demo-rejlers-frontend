@@ -25,7 +25,7 @@ const Home = () => {
   }, []);
 
   const handleBookedCar = () => {
-    if (!startDate && !endDate) {
+    if (!startDate || !endDate) {
       alert("Var vänlig välj start och slutdatum för bokningen");
       return;
     }
@@ -34,6 +34,13 @@ const Home = () => {
 
     if (start > end) {
       alert("Startdatum kan inte vara efter slutdatum");
+      return;
+    }
+
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    if (start < now) {
+      alert("Du kan inte boka med ett startdatum som redan har passerat.");
       return;
     }
 

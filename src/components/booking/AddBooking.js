@@ -6,6 +6,8 @@ import BookingService from "../../services/BookingService";
 const AddBooking = () => {
   const location = useLocation();
 
+  const [message, setMessage] = useState("");
+
   /* const search = new URLSearchParams(location.search);
   const id = search.get('id'); 
   console.log('id: ',id);
@@ -26,6 +28,22 @@ const AddBooking = () => {
 
   const saveBooking = (e) => {
     e.preventDefault();
+    if (!booking.destination) {
+      setMessage("* Var vänlig fyll i destinationen");
+      return;
+    }
+    if (!booking.jobNumber) {
+      setMessage("* Var vänlig fyll i arbetsnummer");
+      return;
+    }
+    if (!booking.arbetsNummer) {
+      setMessage("* Var vänlig fyll i Anställningsnummer");
+      return;
+    }
+    if (!booking.activity) {
+      setMessage("* Var vänlig fyll i aktivitetsnummer");
+      return;
+    }
     BookingService.saveOrder(booking)
       .then((response) => {
         console.log(response);
@@ -53,18 +71,27 @@ const AddBooking = () => {
           <h1>Lägg till Order</h1>
         </div>
 
-        <div className="items-center justify-center h-14 w-full my-4">
-          <label className="block text-emerald-50 text-sm font-normal">
-            Destination
-          </label>
-          <input
-            type="text"
-            name="destination"
-            value={booking.destination}
-            onChange={(e) => handleChange(e)}
-            className="h-10 w-96 border mt-2 px-2 py-2"
-          ></input>
+        <div
+          className="items-center justify-center h-14 w-full my-4"
+          style={{ display: "flex", alignItems: "center", gap: "8px" }}
+        >
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "100%" }}
+          >
+            <label className="block text-emerald-50 text-sm font-normal">
+              Destination
+            </label>
+            <input
+              type="text"
+              name="destination"
+              value={booking.destination}
+              onChange={(e) => handleChange(e)}
+              className="h-10 w-96 border mt-2 px-2 py-2"
+            ></input>
+          </div>
+          {message && <div className="text-emerald-50  ">{message}</div>}
         </div>
+
         <div className="items-center justify-center h-14 w-full my-4">
           <label className="block text-emerald-50 text-sm font-normal">
             Uppdragsnummer

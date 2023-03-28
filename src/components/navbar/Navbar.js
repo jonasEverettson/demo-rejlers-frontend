@@ -2,9 +2,12 @@ import React from "react";
 import Logo from "../../assets/Rejlers_logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
+import { useAuth } from "../security/AuthContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const authContext = useAuth();
+  const isAuthenticated = authContext.isAuthenticated;
 
   const handleLogout = () => {
     navigate("/");
@@ -16,14 +19,16 @@ const Navbar = () => {
         <img src={Logo} alt="logo of Rejlers" />
       </div>
       <div className="rightSide">
-        <Link to="/Home"> Hem</Link>
-        <Link to="/bookingList"> Se dina bokningar</Link>
-        <Link to="/bookingDetails"> Övriga kommande bokningar</Link>
-        <Link to="/admin"> Admin</Link>
-        {/* <a href="/" onClick={handleLogout}>
-          Logga ut
-        </a> */}
-        {<Link to="/logout">Logga ut</Link>}
+        {!isAuthenticated && <Link to="/login">Logga in</Link>}
+        {isAuthenticated && (
+          <>
+            <Link to="/Home"> Hem</Link>
+            <Link to="/bookingList"> Se dina bokningar</Link>
+            <Link to="/bookingDetails"> Övriga kommande bokningar</Link>
+            <Link to="/admin"> Admin</Link>
+            <Link to="/logout">Logga ut</Link>
+          </>
+        )}
       </div>
     </div>
   );

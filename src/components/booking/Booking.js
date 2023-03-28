@@ -12,12 +12,12 @@ const Booking = ({ booking, deleteBooking }) => {
   };
 
   // För att sålla ut alla gamla bokningar i "Övriga kommande bokningar"
-  /* const dateTo = new Date(booking.dateTo);
+  /*   const dateTo = new Date(booking.dateTo);
   const currentDate = new Date();
   if (dateTo < currentDate) {
     return null;
-  } */
-
+  }
+ */
   return (
     <tr key={booking.bookingId}>
       <td className="text-left px-6 py-4 whitespace-nowrap">
