@@ -16,12 +16,15 @@ const AvailableCarList = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/availablecars', {
-          params: {
-            dateFrom: startDate,
-            dateTo: endDate
+        const response = await axios.get(
+          "http://localhost:8080/api/v1/availablecars",
+          {
+            params: {
+              dateFrom: startDate,
+              dateTo: endDate,
+            },
           }
-        });
+        );
         setCars(response.data);
       } catch (error) {
         console.log(error);
@@ -71,8 +74,15 @@ const AvailableCarList = () => {
               ) : (
                 <tr>
                   <td colSpan="5" className="text-center py-4 ">
-                    Tyvärr, Alla bilar är uthyrda under den valda perioden. <br/>
-                    Här är numret till Hertz: 054-21 08 00
+                    Tyvärr, Alla bilar är uthyrda under den valda perioden.{" "}
+                    <br />
+                    Här är numret till{" "}
+                    <a href="https://hyrbilarikarlstad.se/">
+                      {" "}
+                      <u>hyrbilar i Karlstad</u>
+                    </a>
+                    : 054-21 00 00
+                    <br />
                   </td>
                 </tr>
               )}

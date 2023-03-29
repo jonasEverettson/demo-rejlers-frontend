@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FinishBooking = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const bookingId = location.state.bookingId;
   const car = location.state.car;
 
@@ -12,6 +13,17 @@ const FinishBooking = () => {
   const handleKmChange = (event) => {
     setKm(event.target.value);
   };
+
+  useEffect(() => {
+    if (bookingIsFinished) {
+      const timeout = setTimeout(() => {
+        navigate("/home");
+      }, 5000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [bookingIsFinished, navigate]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -56,11 +68,13 @@ const FinishBooking = () => {
           </div>
 
           {bookingIsFinished ? (
-            <p className="text-white">Bokningen är nu avslutad.</p>
+            <p className="text-white">
+              Bokningen är nu avslutad. <br /> Du navigeras nu tillbaka{" "}
+            </p>
           ) : (
             <form onSubmit={handleSubmit}>
               <label className="text-white">
-                Ange Ny Kilometer:
+                Ange Ny Mätarställning:
                 <input
                   type="number"
                   className="w-20 mx-2 text-black"
@@ -74,7 +88,7 @@ const FinishBooking = () => {
                 className="rounded bg-slate-600 text-white px-2 py-2 font-semibold hover:bg-slate-400 mt-3"
                 type="submit"
               >
-                Submit
+                Skicka in
               </button>
             </form>
           )}

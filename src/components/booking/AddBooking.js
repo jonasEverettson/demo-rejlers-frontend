@@ -33,11 +33,11 @@ const AddBooking = () => {
       return;
     }
     if (!booking.jobNumber) {
-      setMessage("* Var vänlig fyll i arbetsnummer");
+      setMessage("* Var vänlig fyll i uppdragsnummer");
       return;
     }
     if (!booking.arbetsNummer) {
-      setMessage("* Var vänlig fyll i Anställningsnummer");
+      setMessage("* Var vänlig fyll i anställningsnummer");
       return;
     }
     if (!booking.activity) {
