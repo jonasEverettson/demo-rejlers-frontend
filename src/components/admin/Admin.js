@@ -8,7 +8,7 @@ const Admin = () => {
 
 
 return (
-  <div className="container mx-6 my-6 ">
+  <div className="container mx-auto my-6 ">
       <div className="h-12">
     <button>
     <a

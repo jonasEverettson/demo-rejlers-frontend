@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CarService from "../../services/CarService";
+import { useAuth } from "../security/AuthContext";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [startDate, setStartdate] = useState();
-  const [endDate, setEndDate] = useState();
+  const location = useLocation();
+  const { employee, isAuthenticated} = useAuth();
+  const [startDate, setStartdate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const [loading, setLoading] = useState(true);
   const [cars, setCars] = useState(null);
@@ -51,32 +54,42 @@ const Home = () => {
     setStartdate(event.target.value);
   };
 
+  
+
   return (
-    <div className="flex justify-center items-center ">
-      <div className="container mx-6 my-6 ml-30">
-        <div className="h-12">
-          <div className="my-6 px-2 py-2 m-1 font-semibold">
-            <h1 className="font-thin text-emerald-50 text-2xl tracking-wider">
-              Var vänlig och välj datum för din bokning.
-            </h1>
-            <br />
-            <label className="text-emerald-50">Från: </label>
+    <div className="flex justify-center min-h-screen px-4">
+    <div className="container mx-4 my-6">
+      {isAuthenticated && employee && (
+            <div>
+              <h1 className="font-thin text-emerald-50 text-2xl tracking-wider mb-4">
+                Välkommen, {employee.firstName} {employee.lastName}!
+              </h1>
+            </div>
+          )}
+      <div>
+        <div className="my-6 px-2 py-2 m-1 font-semibold">
+          <h1 className="font-thin text-emerald-50 text-2xl tracking-wider mb-4">
+            Var vänlig och välj datum för din bokning.
+          </h1>
+
+          <div className="flex flex-col md:flex-row items-center">
+            <label className="text-emerald-50 mb-1 md:mb-0">Från: </label>
             <input
-              className="appearance-none border border-gray-300 rounded-md py-2 px-4 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="appearance-none border border-gray-300 rounded-md py-2 px-4 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2 md:mb-0 md:ml-2"
               type="date"
               value={startDate}
               onChange={handleChangeStartDate}
             />
 
-            <label className="ml-2 text-emerald-50">Till: </label>
+            <label className="ml-0 md:ml-4 text-emerald-50 mb-1 md:mb-0">Till: </label>
             <input
-              className=" appearance-none border border-gray-300 rounded-md py-2 px-4 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="appearance-none border border-gray-300 rounded-md py-2 px-4 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2 md:mb-0 md:ml-2"
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
 
-            <button>
+            <button className="md:ml-4">
               <a
                 onClick={handleBookedCar}
                 className="rounded bg-slate-600 text-white px-2 py-2 m-2 font-semibold hover:bg-slate-400"
@@ -85,25 +98,26 @@ const Home = () => {
               </a>
             </button>
           </div>
-          <br />
-          <br />
-
-          <h2 className="font-thin text-emerald-50 text-2xl tracking-wider ml-2">
-            Registrera din återkomst.
-          </h2>
-          <br />
-          <button>
-            <a
-              onClick={() => navigate("/bookingList")}
-              className="rounded bg-slate-600 text-white px-2 py-2 m-1 font-semibold hover:bg-slate-400 ml-2"
-            >
-              Avsluta Bokning
-            </a>
-          </button>
         </div>
+        <br />
+        <br />
+
+        <h2 className="font-thin text-emerald-50 text-2xl tracking-wider ml-2">
+          Registrera din återkomst.
+        </h2>
+        <br />
+        <button>
+          <a
+            onClick={() => navigate("/bookingList")}
+            className="rounded bg-slate-600 text-white px-2 py-2 m-1 font-semibold hover:bg-slate-400 ml-2"
+          >
+            Avsluta Bokning
+          </a>
+        </button>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Home;

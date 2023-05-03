@@ -35,7 +35,7 @@ const EmployeeList = () => {
   };
 
   return (
-    <div className="container mx-6 my-6">
+    <div className="container mx-auto g my-6">
       <div className="h-12">
         <button
           onClick={() => navigate("/addEmployee")}

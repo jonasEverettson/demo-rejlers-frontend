@@ -22,6 +22,8 @@ class EmployeeService {
   updateEmployee(employee, id){
     return axios.put(EMPLOYEE_API_BASE_URL + "/" + id, employee);
   }
+
+  
 }
 
 export default new EmployeeService;

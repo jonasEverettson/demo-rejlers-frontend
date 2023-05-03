@@ -4,6 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import Booking from "./Booking";
 import BookingService from "../../services/BookingService";
 
+
+//this class is not in use
+
 const UpdateBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate();

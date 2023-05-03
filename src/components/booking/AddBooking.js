@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import BookingService from "../../services/BookingService";
+import { useAuth } from "../security/AuthContext";
 
 const AddBooking = () => {
   const location = useLocation();
+  const { employee } = useAuth();
 
   const [message, setMessage] = useState("");
 
@@ -19,9 +21,10 @@ const AddBooking = () => {
     dateTo: location.state.endDate,
     destination: "",
     jobNumber: "",
-    employeeNumber: "",
     activity: "",
-    car: location.state.car,
+    employee: null,
+    car: location.state.car
+    
   });
 
   const navigate = useNavigate();
@@ -36,10 +39,7 @@ const AddBooking = () => {
       setMessage("* Var vänlig fyll i uppdragsnummer");
       return;
     }
-    if (!booking.arbetsNummer) {
-      setMessage("* Var vänlig fyll i anställningsnummer");
-      return;
-    }
+
     if (!booking.activity) {
       setMessage("* Var vänlig fyll i aktivitetsnummer");
       return;
@@ -47,12 +47,19 @@ const AddBooking = () => {
     BookingService.saveOrder(booking)
       .then((response) => {
         console.log(response);
+        console.log(response.data)
         navigate("/bookingList");
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  useEffect(() => {
+    setBooking(prevBooking => ({
+      ...prevBooking,
+      employee: employee
+    }))
+  }, [employee])
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -60,7 +67,7 @@ const AddBooking = () => {
 
     setBooking((prevBooking) => ({
       ...prevBooking,
-      [name]: value,
+      [name] : value
     }));
   };
 
@@ -104,18 +111,7 @@ const AddBooking = () => {
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
         </div>
-        <div className="items-center justify-center h-14 w-full my-4">
-          <label className="block text-emerald-50 text-sm font-normal">
-            ING.nr
-          </label>
-          <input
-            type="text"
-            name="arbetsNummer"
-            value={booking.arbetsNummer}
-            onChange={(e) => handleChange(e)}
-            className="h-10 w-96 border mt-2 px-2 py-2"
-          ></input>
-        </div>
+
         <div className="items-center justify-center h-14 w-full my-4">
           <label className="block text-emerald-50 text-sm font-normal">
             Aktivitet

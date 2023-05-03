@@ -45,7 +45,7 @@ const BookingList = () => {
   };
 
   return (
-    <div className="container mx-6 my-6">
+    <div className="container mx-auto my-6">
       <div className="h-12"></div>
       <div className="flex shadow border-b">
         <table className="min-w-full">
@@ -76,7 +76,7 @@ const BookingList = () => {
                 Aktivitet
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Email
+                Telefon
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 ING.nr

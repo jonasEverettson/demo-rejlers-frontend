@@ -36,7 +36,7 @@ const AvailableCarList = () => {
   }, [startDate, endDate]);
 
   return (
-    <div className="container mx-6 my-6">
+    <div className="container mx-auto my-6">
       <div className="h-12"></div>
       <div className="flex shadow border-b">
         <table className="min-w-full">

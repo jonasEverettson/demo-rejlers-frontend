@@ -4,7 +4,8 @@ import { useAuth } from "../security/AuthContext";
 
 export default function Login() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+ 
+
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const navigate = useNavigate();
   const authContext = useAuth();
@@ -13,17 +14,20 @@ export default function Login() {
     setUsername(event.target.value);
   }
 
-  function handlePasswordChange(event) {
-    setPassword(event.target.value);
-  }
-
-  function handleSubmit() {
-    if (authContext.login(username, password)) {
-      navigate(`/home`);
-    } else {
+  async function handleSubmit() {
+    try {
+      const { isAuthenticated, user } = await authContext.login(username);
+      if (isAuthenticated) {
+        navigate(`/home`, { state: { user } });
+      } else {
+        setShowErrorMessage(true);
+      }
+    }
+    catch(error){
       setShowErrorMessage(true);
     }
   }
+  
 
   return (
     <div className="flex max-w-2xl mx-20 shadow border-b ">
@@ -38,29 +42,20 @@ export default function Login() {
         )}
         <div className="loginForm">
           <div className="py-1 ">
-            <label className="text-white px-2">Användarnamn:</label>
+            <label className="text-white px-2">Ing.nr:</label>
             <input
               type="text"
               name="username"
               value={username}
               onChange={handleUsernameChange}
-            />
-          </div>
-          <div className="py-2 ">
-            <label className="text-white px-2">Lösenord:</label>
-            <input
-              className="ml-10"
-              type="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
               onKeyUp={(event) => event.key === "Enter" && handleSubmit()}
             />
           </div>
+        
 
           <button
             className="rounded bg-slate-600 text-white px-2 py-2 font-semibold hover:bg-slate-400 mt-4 ml-2"
-            type="button"
+            type="submit"
             name="login"
             onClick={handleSubmit}
           >

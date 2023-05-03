@@ -49,12 +49,12 @@ const Booking = ({ booking, deleteBooking }) => {
         <div className="text-sm text-gray-500">{booking.activity}</div>
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-500">{booking.employee.email}</div>
+        <div className="text-sm text-gray-500">{booking.employee.phoneNumber}</div>
       </td>
 
       {/* Lägg till booking.employee.employeeNumber istället för booking.arbetsnummer när vi har inlogg med användare */}
       <td className="text-left px-6 py-4 whitespace-nowrap uppercase">
-        <div className="text-sm text-gray-500">{booking.arbetsNummer}</div>
+        <div className="text-sm text-gray-500">{booking.employee.employeeNumber}</div>
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">
