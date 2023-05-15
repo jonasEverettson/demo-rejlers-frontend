@@ -32,10 +32,6 @@ export default function AuthProvider({ children }) {
     setEmployee(null);
   }
 
-// Fetch the employee object from the API when the component mounts
-
-
-
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout, employee }}>
       {children}
