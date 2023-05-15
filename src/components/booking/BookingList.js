@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookingService from "../../services/BookingService";
 import Booking from "./Booking";
+import Pagination from "./Pagination";
 
 const BookingList = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [booking, setBookings] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
 
   // Sorterar upp tabellen efter Datum Från
   const sortBookingsByDateFrom = (bookings) => {
@@ -18,6 +22,7 @@ const BookingList = () => {
       : [];
   };
   const sortedBookings = sortBookingsByDateFrom(booking);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +48,15 @@ const BookingList = () => {
       }
     });
   };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+  const totalPages = Math.ceil(sortedBookings.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentBookings = sortedBookings.slice(indexOfFirstItem, indexOfLastItem);
+
 
   return (
     <div className="container mx-auto my-6">
@@ -92,15 +106,20 @@ const BookingList = () => {
 
           {!loading && (
             <tbody className="bg-white">
-              {sortedBookings.map((booking) => (
-                <Booking
-                  booking={booking}
-                  deleteBooking={deleteBooking}
-                  key={booking.bookingId}
-                ></Booking>
-              ))}
+            {currentBookings.map((booking) => (
+            <Booking
+              booking={booking}
+              deleteBooking={deleteBooking}
+              key={booking.bookingId}
+            />
+          ))}
             </tbody>
           )}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
         </table>
       </div>
     </div>
