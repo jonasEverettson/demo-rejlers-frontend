@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookingService from "../../services/BookingService";
-import Booking from "./Booking";
 import Pagination from "./Pagination";
+import OtherBookings from "./OtherBookings";
 
 const BookingDetails = () => {
   const navigate = useNavigate();
@@ -35,17 +35,6 @@ const BookingDetails = () => {
     };
     fetchData();
   }, []);
-
-  const deleteBooking = (e, id) => {
-    e.preventDefault();
-    BookingService.deleteOrder(id).then((res) => {
-      if (booking) {
-        setBookings((prevElement) => {
-          return prevElement.filter((booking) => booking.bookingId !== id);
-        });
-      }
-    });
-  };
 
     const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -96,20 +85,16 @@ const BookingDetails = () => {
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Aktiv
               </th>
-              <th className="text-right font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Val
-              </th>
             </tr>
           </thead>
 
           {!loading && (
             <tbody className="bg-white">
               {booking.map((booking) => (
-                <Booking
+                <OtherBookings
                   booking={booking}
-                  deleteBooking={deleteBooking}
                   key={booking.bookingId}
-                ></Booking>
+                ></OtherBookings>
               ))}
             </tbody>
           )}

@@ -1,16 +1,24 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookingService from "../../services/BookingService";
 import Booking from "./Booking";
 import Pagination from "./Pagination";
+import { useAuth } from "../security/AuthContext";
+import axios from "axios";
 
 const BookingList = () => {
   const navigate = useNavigate();
+  const { employee } = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [booking, setBookings] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const getBookingsByEmployee = (employeeNumber) => { 
+    return axios.get(`http://localhost:8080/api/v1/listOrdersByEmployee?employeeNumber=${employeeNumber}`);
+  }
 
 
   // Sorterar upp tabellen efter Datum Från
@@ -28,7 +36,7 @@ const BookingList = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await BookingService.getBookings();
+        const response = await BookingService.getBookingsByEmployee(employee.employeeNumber);
         setBookings(response.data);
       } catch (error) {
         console.log(error);
@@ -36,7 +44,7 @@ const BookingList = () => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [employee]);
 
   const deleteBooking = (e, id) => {
     e.preventDefault();
@@ -115,11 +123,13 @@ const BookingList = () => {
           ))}
             </tbody>
           )}
+          <nav>
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={handlePageChange}
             />
+            </nav>
         </table>
       </div>
     </div>
