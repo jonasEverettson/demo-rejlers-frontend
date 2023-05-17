@@ -12,13 +12,13 @@ class BookingService {
     return axios.get(BOOKING_API_BASE_URL);
   }
 
-  getBookingsByEmployee = (employeeNumber) => {
-    return axios.get(`http://localhost:8080/api/v1/listOrdersByEmployee?employeeNumber=${employeeNumber}`);
-  }
+
 
   getOrderById(id) {
     return axios.get(BOOKING_API_BASE_URL + "/" + id);
   }
+
+
 
   updateOrder(booking, id) {
     return axios.put("http://localhost:8080/api/v1/finishorder/" + id, booking);
