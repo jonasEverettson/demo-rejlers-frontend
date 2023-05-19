@@ -24,9 +24,6 @@ const OtherBookings = ({ booking, deleteBooking }) => {
         return null;
     } 
 
-
-
-
     return (
     <tr key={booking.bookingId}>
       <td className="text-left px-6 py-4 whitespace-nowrap">

@@ -34,6 +34,10 @@ const FinishBooking = () => {
       },
     };
 
+    if(km <= car.km){
+      alert("Kontrollera mätarställningen, den kan inte vara lägre eller lika som tidigare KM-ställning")
+      return;
+    }
     fetch("http://localhost:8080/api/v1/finishorder", {
       method: "PUT",
       headers: {

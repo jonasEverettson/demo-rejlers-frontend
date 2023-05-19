@@ -16,9 +16,7 @@ const BookingList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const getBookingsByEmployee = (employeeNumber) => { 
-    return axios.get(`http://localhost:8080/api/v1/listOrdersByEmployee?employeeNumber=${employeeNumber}`);
-  }
+
 
 
   // Sorterar upp tabellen efter Datum Från
