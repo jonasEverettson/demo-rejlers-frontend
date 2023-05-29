@@ -71,16 +71,10 @@ const BookingDetails = () => {
                 Destination
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                uppdragsnr
+                Email
               </th>      
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                aktivitet
-              </th>
-              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Telefon
-              </th>
-              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                ING.nr
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Aktiv

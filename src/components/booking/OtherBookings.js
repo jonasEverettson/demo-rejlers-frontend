@@ -14,6 +14,7 @@ const OtherBookings = ({ booking, deleteBooking }) => {
   
   // För att sålla ut alla gamla bokningar i "Övriga kommande bokningar"
   // visar bokningar som är 5 dagar gamla sen syns den ej på listan
+  // dagar / timmar / minuter / sekunder / millisekunder
     
 
     const currentDate = new Date();
@@ -49,16 +50,10 @@ const OtherBookings = ({ booking, deleteBooking }) => {
         <div className="text-sm text-gray-500">{booking.destination}</div>
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-500">{booking.jobNumber}</div>
-      </td>
-      <td className="text-left px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-500">{booking.activity}</div>
+        <div className="text-sm text-gray-500">{booking.employee.email}</div>
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">{booking.employee.phoneNumber}</div>
-      </td>
-      <td className="text-left px-6 py-4 whitespace-nowrap uppercase">
-        <div className="text-sm text-gray-500">{booking.employee.employeeNumber}</div>
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">
