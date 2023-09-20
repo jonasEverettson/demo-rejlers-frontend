@@ -18,7 +18,7 @@ const FinishBooking = () => {
     if (bookingIsFinished) {
       const timeout = setTimeout(() => {
         navigate("/home");
-      }, 5000);
+      }, 4000);
 
       return () => clearTimeout(timeout);
     }
@@ -52,7 +52,7 @@ const FinishBooking = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
-        // handle error and update UI
+        
       });
   };
 

@@ -17,7 +17,7 @@ const Admin = () => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", "ListOrders.csv");
+      link.setAttribute("download", "Bokningar.csv");
       link.click();
       window.URL.revokeObjectURL(url);
     } catch (error) {

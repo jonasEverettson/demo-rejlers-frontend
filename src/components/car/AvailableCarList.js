@@ -74,7 +74,7 @@ const AvailableCarList = () => {
               ) : (
                 <tr>
                   <td colSpan="5" className="text-center py-4 ">
-                    Tyvärr, Alla bilar är uthyrda under den valda perioden.{" "}
+                    Tyvärr, Alla bilar är bokade under den valda perioden.{" "}
                     <br />
                     Här är numret till{" "}
                     <a href="https://hyrbilarikarlstad.se/">

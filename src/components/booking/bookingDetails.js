@@ -14,9 +14,22 @@ const BookingDetails = () => {
 
     // Sorterar upp tabellen efter Datum Från
   const sortBookingsByDateFrom = (bookings) => {
-    return bookings
-      ? bookings.sort((a, b) => {
-          return new Date(a.dateFrom) - new Date(b.dateFrom);
+
+    if(!bookings){
+      return []; // skapar en tom array ifall det inte finns någon bokning lagd
+    }
+
+    const formattedBookings = bookings.map((booking) => {
+      return {
+        ...booking,
+        dateFrom: new Date(booking.dateFrom).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+        dateTo: new Date(booking.dateTo).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+      }
+    })
+    
+    return formattedBookings
+      ? formattedBookings.sort((a, b) => {
+          return new Date(b.dateFrom) - new Date(a.dateFrom);
         })
       : [];
   };
@@ -84,7 +97,7 @@ const BookingDetails = () => {
 
           {!loading && (
             <tbody className="bg-white">
-              {booking.map((booking) => (
+              {currentBookings.map((booking) => (
                 <OtherBookings
                   booking={booking}
                   key={booking.bookingId}
@@ -92,14 +105,15 @@ const BookingDetails = () => {
               ))}
             </tbody>
           )}
+          </table>
+          </div>
           <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={handlePageChange}
             />
-        </table>
       </div>
-    </div>
+  
   );
 };
 

@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import Employee from "./Employee";
+import Pagination from "../booking/Pagination";
 
 const EmployeeList = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +36,16 @@ const EmployeeList = () => {
       }
     });
   };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
+  const totalPages = employees ? Math.ceil(employees.length / itemsPerPage) : 0;
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentEmployees = employees ? employees.slice(indexOfFirstItem, indexOfLastItem) : [];
 
   return (
     <div className="container mx-auto g my-6">
@@ -77,7 +90,7 @@ const EmployeeList = () => {
 
           {!loading && (
             <tbody className="bg-white">
-              {employees.map((employee) => (
+              {currentEmployees.map((employee) => (
                 <Employee
                   employee={employee}
                   deleteEmployee={deleteEmployee}
@@ -86,6 +99,11 @@ const EmployeeList = () => {
               ))}
             </tbody>
           )}
+          <Pagination 
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
         </table>
       </div>
     </div>

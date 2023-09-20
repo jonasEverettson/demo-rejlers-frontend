@@ -8,7 +8,7 @@ export default function Logout() {
     const timeout = setTimeout(() => {
       navigate("/");
       window.location.reload();
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [navigate]);
@@ -16,7 +16,7 @@ export default function Logout() {
   return (
     <div className="logout">
       <h1 className="text-white font-medium tracking-wider py-3 px-6 text-center">
-        Du är nu utloggad!
+        Du loggas nu ut! 
       </h1>
     </div>
   );

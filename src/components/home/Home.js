@@ -32,9 +32,10 @@ const Home = () => {
       alert("Var vänlig välj start och slutdatum för bokningen");
       return;
     }
+    
     const start = new Date(startDate);
     const end = new Date(endDate);
-
+  
     if (start > end) {
       alert("Startdatum kan inte vara efter slutdatum");
       return;
@@ -76,15 +77,15 @@ const Home = () => {
             <label className="text-emerald-50 mb-1 md:mb-0">Från: </label>
             <input
               className="appearance-none border border-gray-300 rounded-md py-2 px-4 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2 md:mb-0 md:ml-2"
-              type="date"
+              type="datetime-local"
               value={startDate}
-              onChange={handleChangeStartDate}
-            />
+              onChange={(e) => setStartdate(e.target.value)}             
+            /> 
 
             <label className="ml-0 md:ml-4 text-emerald-50 mb-1 md:mb-0">Till: </label>
             <input
               className="appearance-none border border-gray-300 rounded-md py-2 px-4 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2 md:mb-0 md:ml-2"
-              type="date"
+              type="datetime-local"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />

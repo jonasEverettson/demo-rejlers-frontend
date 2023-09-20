@@ -27,6 +27,7 @@ import FinishBooking from "./components/booking/FinishBooking";
 
 
 
+
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   if (authContext.isAuthenticated) return children;
@@ -51,6 +52,7 @@ function App() {
                 </AuthenticatedRoute>
               }
             />
+          
             <Route
               path="/availableCarList"
               element={

@@ -14,16 +14,25 @@ const BookingList = () => {
   const [loading, setLoading] = useState(true);
   const [booking, setBookings] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-
-
-
+  const [itemsPerPage, setItemsPerPage] = useState(15);
 
   // Sorterar upp tabellen efter Datum Från
   const sortBookingsByDateFrom = (bookings) => {
-    return bookings
-      ? bookings.sort((a, b) => {
-          return new Date(a.dateFrom) - new Date(b.dateFrom);
+    if (!bookings) {
+      return []; // Return an empty array if bookings is null
+    }
+  
+    const formattedBookings = bookings.map((booking) => {
+      return {
+        ...booking,
+        dateFrom: new Date(booking.dateFrom).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+        dateTo: new Date(booking.dateTo).toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+      };
+    });
+  
+    return formattedBookings
+      ? formattedBookings.sort((a, b) => {
+          return new Date(b.dateFrom) - new Date(a.dateFrom);
         })
       : [];
   };
@@ -96,12 +105,6 @@ const BookingList = () => {
                 Aktivitet
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Telefon
-              </th>
-              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                ING.nr
-              </th>
-              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Aktiv
               </th>
               <th className="text-right font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
@@ -121,6 +124,8 @@ const BookingList = () => {
           ))}
             </tbody>
           )}
+          </table>
+          </div>
           <nav>
             <Pagination
               currentPage={currentPage}
@@ -128,9 +133,9 @@ const BookingList = () => {
               onPageChange={handlePageChange}
             />
             </nav>
-        </table>
+
       </div>
-    </div>
+    
   );
 };
 
